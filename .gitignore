@@ -1,0 +1,43 @@
+## Ignore all JetBrains releated config
+
+# ignore the whole .idea folder (normally not needed, run configs and stuff
+# are in there, but since there will be more than one "sub-project" in here,
+# that would mess up the repo
+**/.idea/
+*.sln.iml
+# C-make
+cmake-build-*/
+
+# File based project format
+*.iws
+
+## C# / .NET specific stuff
+# Build results
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+[Rr]eleases/
+x64/
+x86/
+[Ww][Ii][Nn]32/
+[Aa][Rr][Mm]/
+[Aa][Rr][Mm]64/
+bld/
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+[Ll]ogs/
+
+# .NET Core
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+## User-specific files
+*.user
+*.sln.docstates
+
+## Test files
+a.txt
+a.out
+a.err
