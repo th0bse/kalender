@@ -11,11 +11,6 @@ namespace CalendarLib
     public class CalendarLib
     {
 
-        public static void Main(string[] args)
-        {
-            Console.WriteLine(ZellerCongruence(8,12,2021));
-        }
-        
         /// <summary>
         /// Calculate the weekday for a given date.
         /// 
