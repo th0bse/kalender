@@ -53,7 +53,7 @@ namespace CalendarLib
             Month.DECEMBER => 12,
             _ => throw new ArgumentOutOfRangeException(nameof(month), month, null)
         };
-
+        
         /// <summary>
         /// Convert a Month enum instance to its string literal.
         /// </summary>
