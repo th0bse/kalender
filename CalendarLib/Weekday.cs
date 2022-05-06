@@ -3,6 +3,11 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace CalendarLib
 {
+    /// <summary>
+    /// Enum class representing the weekdays. Several different
+    /// properties are attached via extension methods in the
+    /// WeekdayExtensions class.
+    /// </summary>
     [SuppressMessage("ReSharper", "InconsistentNaming")]
     public enum Weekday
     {

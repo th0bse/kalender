@@ -3,6 +3,12 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace CalendarLib
 {
+    
+    /// <summary>
+    /// Enum class representing the months of the year. Several different
+    /// properties are attached via extension methods in the MonthExtensions
+    /// class.
+    /// </summary>
     [SuppressMessage("ReSharper", "InconsistentNaming")]
     public enum Month
     {
@@ -20,8 +26,17 @@ namespace CalendarLib
         DECEMBER
     }
 
+    /// <summary>
+    /// Extension class for the Month enum.
+    /// </summary>
     public static class MonthExtensions
     {
+        /// <summary>
+        /// Convert a Month enum instance to its integer literal.
+        /// </summary>
+        /// <param name="month">the month</param>
+        /// <returns>the integer literal</returns>
+        /// <exception cref="ArgumentOutOfRangeException"></exception>
         public static int IntLiteral(this Month month) => month switch
         {
             Month.JANUARY => 1,
@@ -39,6 +54,12 @@ namespace CalendarLib
             _ => throw new ArgumentOutOfRangeException(nameof(month), month, null)
         };
 
+        /// <summary>
+        /// Convert a Month enum instance to its string literal.
+        /// </summary>
+        /// <param name="month">the month</param>
+        /// <returns>the string literal</returns>
+        /// <exception cref="ArgumentOutOfRangeException"></exception>
         public static string StringLiteral(this Month month) => month switch
         {
             Month.JANUARY => "January",
@@ -56,6 +77,12 @@ namespace CalendarLib
             _ => throw new ArgumentOutOfRangeException(nameof(month), month, null)
         };
 
+        /// <summary>
+        /// Convert an integer literal to the corresponding Month enum instance.
+        /// </summary>
+        /// <param name="intLiteral">the integer literal</param>
+        /// <returns>the Month enum instance</returns>
+        /// <exception cref="ArgumentOutOfRangeException"></exception>
         public static Month ToMonth(this int intLiteral) => intLiteral switch
         {
             1 => Month.JANUARY,
@@ -73,6 +100,12 @@ namespace CalendarLib
             _ => throw new ArgumentOutOfRangeException(nameof(intLiteral), intLiteral, null)
         };
 
+        /// <summary>
+        /// Convert a string literal to the corresponding Month enum instance.
+        /// </summary>
+        /// <param name="stringLiteral">the string literal</param>
+        /// <returns>the Month enum instance</returns>
+        /// <exception cref="ArgumentOutOfRangeException"></exception>
         public static Month ToMonth(this string stringLiteral) => stringLiteral.ToLower() switch
         {
             "january" => Month.JANUARY,
@@ -90,10 +123,18 @@ namespace CalendarLib
             _ => throw new ArgumentOutOfRangeException(nameof(stringLiteral), stringLiteral, null)
         };
 
+        /// <summary>
+        /// Get the number of days in a month in a specific year, respecting
+        /// leap years.
+        /// </summary>
+        /// <param name="month">the month</param>
+        /// <param name="year">the year</param>
+        /// <returns>the number of days in the month</returns>
+        /// <exception cref="ArgumentOutOfRangeException"></exception>
         public static int DaysInMonth(this Month month, int year) => month switch
         {
             Month.JANUARY => 31,
-            Month.FEBRUARY => (CalendarLib.IsLeapYear(year)) ? 29 : 28,
+            Month.FEBRUARY => CalendarLib.IsLeapYear(year) ? 29 : 28,
             Month.MARCH => 31,
             Month.APRIL => 30,
             Month.MAY => 31,
