@@ -34,17 +34,43 @@ namespace CalendarLib
             year %= 100;
             return ((26 * month - 1) / 10 + day + year + year / 4 + c / 4 + 5 * c) % 7;
         }
-
+        
+        /// <summary>
+        /// Get the weekday (as instance of the Weekday enum) for a specific
+        /// date.
+        /// </summary>
+        /// <param name="day">the day</param>
+        /// <param name="month">the month</param>
+        /// <param name="year">the year</param>
+        /// <returns>an instance of Weekday for the weekday corresponding
+        /// to the date given</returns>
         public static Weekday GetWeekdayForDate(int day, int month, int year)
         {
             return ZellerCongruence(day, month, year).ToWeekday();
         }
 
+        /// <summary>
+        /// Get the weekday for the first of a month.
+        /// </summary>
+        /// <param name="month">the month</param>
+        /// <param name="year">the year</param>
+        /// <returns>an instance of Weekday for the weekday corresponding
+        /// to the date given</returns>
         public static Weekday GetWeekdayForFirstOfMonth(Month month, int year)
         {
             return ZellerCongruence(1, month.IntLiteral(), year).ToWeekday();
         }
 
+        /// <summary>
+        /// Returns true if the year given is a leap year, false if not.
+        /// This is determined as follows:
+        /// If a year can be divided by 4, it is a leap year, except when
+        /// it is the start of a new century (can be divided by 100). But,
+        /// if it would be a leap year (but also the start of a new century),
+        /// it still is a leap year if it can be divided by 400.
+        /// </summary>
+        /// <param name="year">the year</param>
+        /// <returns>true if the year is a leap year, false if not</returns>
         public static bool IsLeapYear(int year)
         {
             var isLeapYear = false;
