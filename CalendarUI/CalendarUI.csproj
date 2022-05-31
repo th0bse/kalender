@@ -1,0 +1,24 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <OutputType>WinExe</OutputType>
+        <TargetFramework>net6.0-windows</TargetFramework>
+        <Nullable>enable</Nullable>
+        <UseWPF>true</UseWPF>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\CalendarLib\CalendarLib.csproj" />
+        <Resource Include=".\Resources\Fonts\Roboto-Regular.ttf" />
+        <Resource Include=".\Resources\Fonts\Roboto-Bold.ttf" />
+        <None Remove="Resources\Images\chevron_left.png" />
+        <Resource Include="Resources\Images\chevron_left.png">
+          <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Resource>
+        <None Remove="Resources\Images\chevron_right.png" />
+        <Resource Include="Resources\Images\chevron_right.png">
+          <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Resource>
+    </ItemGroup>
+    
+</Project>
