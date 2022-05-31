@@ -1,35 +1,42 @@
-﻿using System;
-using CalendarLib;
+﻿using CalendarLib;
+using static CalendarLib.CalendarLib;
 
 namespace CalendarCLI
 {
-    public class CalendarCLI
+    public static class CalendarCLI
     {
-
+        /// <summary>
+        /// Main method, reads user input in a loop to display the month the user wants to
+        /// display. Can be terminated by entering 'exit' on the command line.
+        /// </summary>
+        /// <param name="args"></param>
         public static void Main(string[] args)
         {
-
             Console.WriteLine("To terminate the program, enter \"exit\" at any time");
+            // continue until the user enters 'exit' on the command line
             while (true)
             {
                 int month;
                 string s;
                 do
                 {
-                    Console.Write("Please enter the month you want to display:");
-                    s = Console.ReadLine();
+                    Console.Write("Please enter the month you want to display: ");
+                    s = Console.ReadLine()!;
                     if (s.Equals("exit")) Environment.Exit(0);
                 } while (!int.TryParse(s, out month));
 
-                Month monthToDisplay = month.ToMonth();
+                var monthToDisplay = month.ToMonth();
 
-                int yearToDisplay;
+                var yearToDisplay = 0;
+                var success = false;
                 do
                 {
                     Console.Write("Please enter the year you want to display:");
-                    s = Console.ReadLine();
+                    s = Console.ReadLine()!;
                     if (s.Equals("exit")) Environment.Exit(0);
-                } while (!int.TryParse(s, out yearToDisplay));
+                    success = int.TryParse(s, out yearToDisplay);
+                    if (yearToDisplay is < 1528 or > 3000) success = false;
+                } while (!success);
 
                 DisplayMonth(monthToDisplay, yearToDisplay);
             }
@@ -37,14 +44,14 @@ namespace CalendarCLI
 
         private static void DisplayMonth(Month month, int year)
         {
-            int days = month.DaysInMonth(year);
-            int dayNum = 1;
-            Weekday startDay = CalendarLib.CalendarLib.GetWeekdayForFirstOfMonth(month, year);
-            int skipAtStart = startDay.IntLiteral();
+            var days = month.DaysInMonth(year);
+            var dayNum = 1;
+            var startDay = GetWeekdayForFirstOfMonth(month, year);
+            var skipAtStart = startDay.IntLiteral();
             Console.WriteLine("SU MO TU WE TH FR SA");
-            for (int i = 1; i < 7; i++)
+            for (var i = 1; i < 7; i++)
             {
-                for (int j = 1; j < 8; j++)
+                for (var j = 1; j < 8; j++)
                 {
                     if (skipAtStart > 0)
                     {
@@ -60,10 +67,19 @@ namespace CalendarCLI
                     {
                         Console.Write("  ");
                     }
+
                     Console.Write(" ");
                 }
+
                 Console.Write("\n");
             }
+
+            Console.WriteLine("Holidays: ");
+            month.GetHolidaysForMonth(year).ForEach(h =>
+            {
+                h.GetDate(year, out _, out var day);
+                if (day > 0) Console.WriteLine($"{h.StringLiteral()} : {day} {month.StringLiteral()}");
+            });
         }
     }
 }
