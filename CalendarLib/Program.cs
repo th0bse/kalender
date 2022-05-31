@@ -1,7 +1,4 @@
-﻿using System;
-using System.Diagnostics.CodeAnalysis;
-
-namespace CalendarLib
+﻿namespace CalendarLib
 {
     /// <summary>
     /// Library class for calendar-related calculations.
@@ -9,7 +6,7 @@ namespace CalendarLib
     /// This library is used by the frontend(s) to e.g. calculate the
     /// weekday for a specific date, or the dates for certain holidays.
     /// </summary>
-    public class CalendarLib
+    public static class CalendarLib
     {
 
         /// <summary>

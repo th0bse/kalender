@@ -1,4 +1,3 @@
-using System;
 using System.Diagnostics.CodeAnalysis;
 
 namespace CalendarLib
@@ -147,5 +146,38 @@ namespace CalendarLib
             Month.DECEMBER => 31,
             _ => throw new ArgumentOutOfRangeException(nameof(month), month, null)
         };
+
+        public static int MonthOverUnderflow(this Month startingMonth, int year, int days, out Month month)
+        {
+            month = startingMonth;
+            // underflow
+            if (days <= 0)
+            {
+                month = (month.IntLiteral() - 1).ToMonth();
+                days += month.DaysInMonth(year);
+            }
+            // overflow
+            else
+            {
+                while (days > month.DaysInMonth(year))
+                {
+                    days -= month.DaysInMonth(year);
+                    month = (month.IntLiteral() + 1).ToMonth();
+                }
+            }
+            return days;
+        }
+
+        public static Month PreviousMonth(this Month month)
+        {
+            if (month != Month.JANUARY) return (month.IntLiteral() - 1).ToMonth();
+            return Month.DECEMBER;
+        }
+
+        public static Month NextMonth(this Month month)
+        {
+            if (month != Month.DECEMBER) return (month.IntLiteral() + 1).ToMonth();
+            return Month.JANUARY;
+        }
     }
 }
