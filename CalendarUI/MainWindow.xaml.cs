@@ -130,12 +130,8 @@ namespace CalendarUI
         /// <param name="e"></param>
         private void ButtonBack_OnClick(object sender, RoutedEventArgs e)
         {
-            if (_displayedMonth != Month.JANUARY) _displayedMonth = (_displayedMonth.IntLiteral() - 1).ToMonth();
-            else
-            {
-                _displayedMonth = Month.DECEMBER;
-                _displayedYear--;
-            }
+            if (_displayedMonth == Month.JANUARY) _displayedYear--;
+            _displayedMonth = _displayedMonth.PreviousMonth();
 
             MonthComboBox.SelectedItem = _displayedMonth.StringLiteral();
             YearTextBox.Text = _displayedYear.ToString();
@@ -150,16 +146,9 @@ namespace CalendarUI
         /// <param name="e"></param>
         private void ButtonForward_OnClick(object sender, RoutedEventArgs e)
         {
-            if (_displayedMonth != Month.DECEMBER)
-            {
-                _displayedMonth = (_displayedMonth.IntLiteral() + 1).ToMonth();
-            }
-            else
-            {
-                _displayedMonth = Month.JANUARY;
-                _displayedYear++;
-            }
-
+            if (_displayedMonth == Month.DECEMBER) _displayedYear++;
+            _displayedMonth = _displayedMonth.NextMonth();
+            
             MonthComboBox.SelectedItem = _displayedMonth.StringLiteral();
             YearTextBox.Text = _displayedYear.ToString();
             DisplayMonth(_displayedMonth, _displayedYear);

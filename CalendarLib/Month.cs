@@ -147,6 +147,25 @@ namespace CalendarLib
             _ => throw new ArgumentOutOfRangeException(nameof(month), month, null)
         };
 
+        /// <summary>
+        /// Calculate the day and month, starting from the first of the given month.
+        ///
+        /// For example, to calculate Whit Monday (The 50th day of the easter period),
+        /// one would put 'easter day + 50' into days, the month easter is in (april or may)
+        /// into startingMonth and the year to calculate for (important if the year is a
+        /// leap year when calculating in or across february).
+        ///
+        /// It is also possible to use a negative value for the days parameter. Then the
+        /// methods calculates backwards.
+        ///
+        /// It is not possible to cross the boundary from one year to another, the calculation
+        /// only works within the same year.
+        /// </summary>
+        /// <param name="startingMonth">the month to calculate from</param>
+        /// <param name="year">the year to calculate in</param>
+        /// <param name="days">number of days from the 1st of startingMonth</param>
+        /// <param name="month">out parameter for the resulting month</param>
+        /// <returns>the resulting day</returns>
         public static int MonthOverUnderflow(this Month startingMonth, int year, int days, out Month month)
         {
             month = startingMonth;
@@ -168,12 +187,22 @@ namespace CalendarLib
             return days;
         }
 
+        /// <summary>
+        /// Get the month before the given one.
+        /// </summary>
+        /// <param name="month">the given month</param>
+        /// <returns>the previous month</returns>
         public static Month PreviousMonth(this Month month)
         {
             if (month != Month.JANUARY) return (month.IntLiteral() - 1).ToMonth();
             return Month.DECEMBER;
         }
 
+        /// <summary>
+        /// Get the month after the given one.
+        /// </summary>
+        /// <param name="month">the given month</param>
+        /// <returns>the next month</returns>
         public static Month NextMonth(this Month month)
         {
             if (month != Month.DECEMBER) return (month.IntLiteral() + 1).ToMonth();
