@@ -2,6 +2,8 @@
 This is a small calendar app written in C# with WPF as UI-Framework.
 It is a school project for the programming class at BBSII Göttingen.
 
+To run the project, .net 6.0 is needed.
+
 ## Structure
 There are three projects in the solution:
 * CalendarLib
@@ -23,3 +25,5 @@ present in the *CalendarUI* project.
 **CalendarUI** is a GUI that uses the WPF framework. It is a calendar
 app that displays a month of choice, ranging from October 1582 to
 December 3000. It also uses the functionality provided by *CalendarLib*.
+
+The required program structure diagrams are in the folder **images**.
